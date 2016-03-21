@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Collection name="Article Library" guid="{FB1FD91D-A393-4D78-AAB4-27382CEC2D12}" system="No" updatable="Yes">
+	<Help></Help>
+	<Addon name="Article Library" guid="{CC8D2284-F308-4DA6-8158-C94931E1E7B0}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList><![CDATA[Initial Article Library Category=[None:0|listID(Article Library Categories)]
+Initial Articles to Display
+]]></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>Yes</Content>
+		<Template>No</Template>
+		<Admin>Yes</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>No</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles><![CDATA[.libraryContainer{
+	padding:5px;	
+}
+
+.fieldCaption{
+	font-weight:bold;
+}
+.fieldData{
+	margin:3px 0px 10px 0px;
+}
+.summaryTable{
+	width: 100%;
+	border-spacing: 0px;
+	padding: 0px;
+	border:1px solid #000000;
+}
+.header{
+	color: #FFFFFF;
+	background-color: #000000;
+	font-weight: bold;
+	border-bottom:1px solid #FFFFFF;
+	padding: 5px;	
+}
+.returnContainer{
+	margin:10px 0px 0px 0px;
+}
+.summaryEvenLeft{
+	width:65%;
+	padding: 5px;
+	border-bottom:1px solid #000000;
+}
+.summaryEvenRight{
+	padding: 5px;
+	width:35%;
+	border-bottom:1px solid #000000;
+}
+.summaryOddLeft{
+	width:65%;
+	padding: 5px;
+	border-bottom:1px solid #000000;
+}
+.summaryOddRight{
+	padding: 5px;
+	width:35%;
+	border-bottom:1px solid #000000;
+}
+.buttonContainer{
+	margin:10px 0px 0px 0px;
+}]]></Styles>
+		<Scripting Language="VBScript" EntryPoint="getContent" Timeout="5000">
+		<Code><![CDATA[function getContent()
+
+	dim stream
+	dim cs
+	dim recordID
+	dim categoryID
+	dim keyWord
+	dim rowClass
+	dim rowCount
+	Dim pageReference
+	dim layoutID
+	dim cs2
+	dim hidePrint
+	dim initialrecords
+	dim initialCategory
+	dim copy
+	dim uploadFile
+	dim target
+	dim link
+
+	set cs = cp.csNew
+	set cs2 = cp.csNew
+	recordID = cp.utils.encodeInteger(cp.doc.var("rec"))
+	categoryID = cp.utils.encodeInteger(cp.doc.var("cat"))
+	keyWord = cp.doc.var("key")
+	pageReference = CP.Request.Page & "?" & CP.Request.QueryString
+	hidePrint = cp.utils.EncodeBoolean(cp.doc.var("hideprint"))
+	initialrecords = cp.utils.encodeInteger(cp.doc.var("Initial Articles to Display"))
+	initialCategory = cp.utils.encodeInteger(cp.doc.var("Initial Article Library Category"))
+
+	if recordID <> 0 then
+
+		if cs.Open("Article Library Data", "ID=" & recordID) then
+			stream = stream & cs.GetEditLink()
+			stream = stream & cp.html.h1(cs.GetText("Name"),,"articleHead")
+			stream = stream & cp.html.div(cs.GetText("Copy"),,"articleCopy")
+			'
+			uploadFile = cs.GetText("uploadFileName")
+			link = cs.getText("link")
+			'
+			if uploadFile <> "" then
+				stream = stream & "<div class=""articleFileCon""><p><a target=""_blank"" href=""" & cp.site.FilePath & uploadFile & """>Click here to view the associated file</a></p></div>"
+			end if
+			if link <> "" then
+				if instr( link, "://" )=0 then
+					link = "http://" & link
+				end if
+				stream = stream & "<div class=""articleLinkCon""><p><a target=""_blank"" href=""" & link & """>Click here to view the website</a></p></div>"
+			end if
+		end if
+		call cs.Close()
+
+		link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", 0, True)
+		link = cp.Utils.ModifyLinkQueryString(link, "button", "Search", True)
+		stream = stream & cp.html.div("<a href=""" & link & """>Return to Search Results</a>",,"returnContainer")
+	end if
+	'
+	if cp.doc.var("button") = "Search" then
+		if keyWord <> "" then
+			criteria = "((name like " & cp.db.encodeSQLText("%" & keyword & "%") & ")"
+			criteria = criteria & " OR (copy like " & cp.db.encodeSQLText("%" & keyword & "%") & "))"
+		end if
+		if categoryID <> 0 then
+			if criteria <> "" then
+				criteria = criteria & " AND "
+			end if
+			criteria = criteria & "(articleLibraryCategoryID=" & categoryID &")"
+		end if
+		'
+		if cs.Open("Article Library Data", criteria,"name") then
+			stream = stream & "<table class=""summaryTable"">"
+			stream = stream & "<tr>"
+			stream = stream & "<td class=""header"">Name</td>"
+			stream = stream & "<td class=""header"">Category</td>"
+			stream = stream & "</tr>"
+			do while cs.OK()
+	            		If (rowCount Mod 2) = 0 Then
+	                		rowClass = "summaryOdd"
+	            		Else
+	                		rowClass = "summaryEven"
+	            		End If
+				'
+				uploadFile = cs.GetText("uploadFileName")
+				copy = cs.GetText("copy")
+				'
+				if uploadFile<>"" and copy="" then
+					link = cp.Site.FilePath & uploadFile
+					target = "_blank"
+				else
+					link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cs.GetInteger("ID"), True)
+					link = cp.Utils.ModifyLinkQueryString(link, "key", keyword, True)
+					link = cp.Utils.ModifyLinkQueryString(link, "cat", categoryID, True)
+					target = "_self"
+				end if
+				'
+				stream = stream & "<tr>"
+				stream = stream & "<td class=""" & rowClass & "Left"">" & cs.GetEditLink() & "<a href=""" & link & """>" & cs.GetText("Name") & "</a></td>"
+				stream = stream & "<td class=""" & rowClass & "Right"">" & cs.GetText("articleLibraryCategoryID") & "</td>"
+				stream = stream & "</tr>"
+				cs.goNext()
+				rowCount = rowCount + 1
+			loop
+			stream = stream & "</table>"
+		else
+			stream = stream & cp.html.p("Your search returned no results",,"ccError")
+		end if
+		cs.Close()
+		'
+	elseif recordID = 0 then
+
+		call cp.site.SetProperty("News Page Location", CP.Request.Page & "?" & CP.Request.QueryString)
+
+		if initialrecords <> 0 then
+			'
+			'	if selected only show selected category initially
+			'
+			if initialCategory <> 0 then
+				criteria = "articleLibraryCategoryID=" & initialCategory
+			end if
+			'
+			call cs.Open("Article Library Data", criteria,"DateAdded desc")
+			stream = stream & "<table class=""summaryTable"">"
+			stream = stream & "<tr>"
+			stream = stream & "<td class=""header"">Name</td>"
+			stream = stream & "<td class=""header"">Category</td>"
+			stream = stream & "</tr>"
+			do while (cs.OK()) and (rowCount<=initialrecords)
+		         	If (rowCount Mod 2) = 0 Then
+		               		rowClass = "summaryOdd"
+		           	Else
+		               		rowClass = "summaryEven"
+		           	End If
+				'
+				uploadFile = cs.GetText("uploadFileName")
+				copy = cs.GetText("copy")
+				'
+				if uploadFile<>"" and copy="" then
+					link = cp.Site.FilePath & uploadFile
+					target = "_blank"
+				else
+					link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cs.GetInteger("ID"), True)
+					link = cp.Utils.ModifyLinkQueryString(link, "key", keyword, True)
+					link = cp.Utils.ModifyLinkQueryString(link, "cat", categoryID, True)
+					target = "_self"
+				end if
+				'
+				stream = stream & "<tr>"
+				stream = stream & "<td class=""" & rowClass & "Left"">" & cs.GetEditLink() & "<a target=""" & target & """ href=""" & link & """>" & cs.GetText("Name") & "</a></td>"
+				stream = stream & "<td class=""" & rowClass & "Right"">" & cs.GetText("articleLibraryCategoryID") & "</td>"
+				stream = stream & "</tr>"
+				call cs.goNext()
+				rowCount = rowCount + 1
+			loop
+			stream = stream & "</table>"
+			call cs.Close()
+			'
+			stream = stream & "<img src=""/ccLib/images/spacer.gif"" width=""10"" height=""20"">"
+		end if
+
+		stream = stream & cp.html.div("Keyword:",,"fieldCaption")
+		stream = stream & cp.html.div(cp.Html.inputText("key","",,"35"),,"fieldData")
+
+		stream = stream & cp.html.div("Category:",,"fieldCaption")
+		stream = stream & cp.html.div(cp.Html.SelectContent("cat","","Article Library Categories",,"Select One"),,"fieldData")
+
+		stream = stream & cp.html.div(cp.html.button("button", "Search"),,"buttonContainer")
+
+		stream = cp.html.form(stream)
+	end if
+
+	if ((recordID <> 0) OR (cp.doc.var("button") = "Search")) and (not hidePrint) then
+		link = cp.utils.ModifyLinkQueryString(pageReference, "rec", 0)
+		link = cp.Utils.ModifyLinkQueryString(link, "key", "")
+		link = cp.Utils.ModifyLinkQueryString(link, "cat", 0)
+		link = cp.Utils.ModifyLinkQueryString(link, "button", "")
+		stream = stream & cp.html.div("<a href=""" & link & """>Create another search</a>",,"returnContainer")
+	end if
+
+	getContent = cp.html.div(stream, ,"libraryContainer")
+
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<Addon name="Article Library List" guid="{BD8F8132-2FF1-4AA4-99D4-8D5F8CD9A3B2}" type="Add-on">
+		<Copy></Copy>
+		<CopyText></CopyText>
+		<ActiveXProgramID></ActiveXProgramID>
+		<DotNetClass></DotNetClass>
+		<ArgumentList><![CDATA[Records to Display]]></ArgumentList>
+		<AsAjax>No</AsAjax>
+		<Filter>No</Filter>
+		<Help></Help>
+		<HelpLink></HelpLink>
+		<Icon Link="" width="0" height="0" sprites="0" />
+		<InIframe>No</InIframe>
+		<BlockEditTools>No</BlockEditTools>
+		<FormXML></FormXML>
+		<IsInline>No</IsInline>
+		<JavascriptOnLoad></JavascriptOnLoad>
+		<JavascriptInHead></JavascriptInHead>
+		<JavascriptBodyEnd></JavascriptBodyEnd>
+		<MetaDescription></MetaDescription>
+		<OtherHeadTags></OtherHeadTags>
+		<Content>Yes</Content>
+		<Template>Yes</Template>
+		<Admin>Yes</Admin>
+		<OnPageEndEvent>No</OnPageEndEvent>
+		<OnPageStartEvent>No</OnPageStartEvent>
+		<OnBodyStart>No</OnBodyStart>
+		<OnBodyEnd>No</OnBodyEnd>
+		<RemoteMethod>No</RemoteMethod>
+		<ProcessRunOnce>No</ProcessRunOnce>
+		<ProcessInterval>0</ProcessInterval>
+		<PageTitle></PageTitle>
+		<RemoteAssetLink></RemoteAssetLink>
+		<Styles><![CDATA[
+.libraryList a{
+	font-weight: bold;
+}
+
+.libraryList a:hover{
+	font-weight: bold;
+}
+
+.libraryList a:visited{
+	font-weight: bold;
+}]]></Styles>
+		<Scripting Language="" EntryPoint="" Timeout="5000">
+		<Code><![CDATA[function getContent()
+
+	dim stream
+	dim cs
+	dim rowCount
+	Dim pageReference
+	dim recordsToDisplay
+
+	recordsToDisplay = cp.utils.encodeInteger(cp.doc.var("Records to Display"))
+
+	if recordsToDisplay = 0 then
+		recordsToDisplay = 5
+	end if
+
+	rowCount = 1
+	pageReference = cp.site.getProperty("News Page Location")
+
+	set cs = cp.csNew
+	call cs.Open("Article Library Data",,"DateAdded desc")
+	do while (cs.OK()) and (rowCount<=recordsToDisplay)
+		link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cs.GetInteger("ID"), True)
+		link = cp.Utils.ModifyLinkQueryString(link, "key", keyword, True)
+		link = cp.Utils.ModifyLinkQueryString(link, "cat", categoryID, True)
+		stream = stream & cp.html.li("<a href=""" & link & """>" & cs.GetText("Name") & "</a>")
+		call cs.goNext()
+		rowCount = rowCount + 1
+	loop
+	call cs.Close()
+
+	getContent = cp.html.ul(stream,,"libraryList")
+
+end function]]></Code>
+		</Scripting>
+	</Addon>
+	<CDef Name="Article Library Categories" Active="1" AdminOnly="0" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="0" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="articleLibraryCategories" ContentDataSourceName="Default" ContentTableName="articleLibraryCategories" DefaultSortMethod="By Name" DeveloperOnly="0" DropDownFieldList="Name" EditorGroupName="Content Editors" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="0" guid="{317C3059-265B-4DE6-8246-2AD43C6CE3A4}" >
+		<Field Name="Name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="Active" active="True" AdminOnly="False" Authorable="True" Caption="Active" DeveloperOnly="False" EditSortPriority="200" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="SortOrder" active="True" AdminOnly="False" Authorable="False" Caption="Alpha Sort Order" DeveloperOnly="False" EditSortPriority="2000" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+	</CDef>
+	<CDef Name="Article Library Data" Active="1" AdminOnly="0" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="0" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="articleLibraryData" ContentDataSourceName="Default" ContentTableName="articleLibraryData" DefaultSortMethod="By Name" DeveloperOnly="0" DropDownFieldList="Name" EditorGroupName="" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="0" guid="{9C67F151-0BA5-4B71-A296-33E61307414F}" >
+		<Field Name="Name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="Active" active="True" AdminOnly="False" Authorable="True" Caption="Active" DeveloperOnly="False" EditSortPriority="200" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="1" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="SortOrder" active="True" AdminOnly="False" Authorable="False" Caption="Alpha Sort Order" DeveloperOnly="False" EditSortPriority="2000" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="copy" active="True" AdminOnly="False" Authorable="True" Caption="Copy" DeveloperOnly="False" EditSortPriority="310" FieldType="HTML" HTMLContent="True" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="uploadFileName" active="True" AdminOnly="False" Authorable="True" Caption="Upload" DeveloperOnly="False" EditSortPriority="320" FieldType="File" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="articleLibraryCategoryID" active="True" AdminOnly="False" Authorable="True" Caption="Library Category" DeveloperOnly="False" EditSortPriority="300" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="Article Library Categories" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="link" active="True" AdminOnly="False" Authorable="True" Caption="Link" DeveloperOnly="False" EditSortPriority="330" FieldType="Link" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+	</CDef>
+</Collection>
