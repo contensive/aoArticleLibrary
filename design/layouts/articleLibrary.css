@@ -1,0 +1,3 @@
+.articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
+.searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
+.fieldData {flex-grow: 1; margin-right:15px;}

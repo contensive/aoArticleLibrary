@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <!-- ///////////// CSS /////////////// -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="articleLibrary.css" rel="stylesheet">
+
+    <!-- ///////////// JS /////////////// -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="articleLibraryWrapper">
+      <!-- SEARCH AND FILTER TOOLS -->
+
+        <form enctype="MULTIPART/FORM-DATA" method="POST">
+          <div class="searchTools">
+            <div class="fieldData form-group">
+              <input class="form-control" type="Text" name="key" placeholder="Keyword">
+            </div>
+            <div class="fieldData form-group">
+              <select size="1" name="cat" class="form-control">
+                <option value="">Category</option>
+                <option value="1">ACategory</option>
+              </select>
+            </div>
+            <div class="buttonContainer">
+              <button type="submit" class="btn btn-default">Search</button>
+            </div>
+          </div>
+        </form>
+
+      <!-- FEATURED ARTICLES / NEWEST ITEMS LIST (Limit 10) / LIST RESULTS -->
+      <div class="listResults">
+        <div class="listResult">
+          <div class="listImg"><img src=""></div>
+          <div class="listContent">
+            <div class="itemTitle"></div>
+            <div class="itemDescription">
+              At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non... 
+              </div>
+            <div class="itemDate">3/2/2017</div>
+            <div class="itemAuthor">Dr. David Jones</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
