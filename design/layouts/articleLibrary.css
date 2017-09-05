@@ -1,3 +1,15 @@
 .articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
-.searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
-.fieldData {flex-grow: 1; margin-right:15px;}
+
+  .searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
+    .fieldData {flex-grow: 1; margin-right:15px;}
+    .buttonContainer {}
+
+  .listResults {}
+    .listResult {display: flex; margin-bottom:15px; padding:5px 5px; }
+      .listImg {margin-right:20px;}
+        .listImg img {width:200px;}
+      .listContent {}
+        .itemTitle {font-size: 18px; font-weight: bold;}
+        .itemDescription {padding-bottom:10px;}
+        .itemDate {}
+        .itemAuthor {}
