@@ -6,14 +6,12 @@ Namespace Model.viewModels
         '
         '
         '
-        Public Shared Function GetTotalOfPages(ByVal cp As CPBaseClass, TotalRecords As Integer, MaxRecordsByPage As Integer) As Integer
-            Dim TotalPages As Integer = 0
+        Public Shared Function GetPaginationTotalPages(ByVal cp As CPBaseClass, TotalRecords As Integer, MaxRecordsByPage As Integer) As Integer
+            Dim TotalPages As Integer = 1
             Try
                 '
-                If TotalRecords >= MaxRecordsByPage Then
-                    TotalPages = Cint((TotalRecords + MaxRecordsByPage - 1) / MaxRecordsByPage)
-                Else
-                    TotalPages = 1
+                If TotalRecords > 0 And MaxRecordsByPage > 0 Then
+                    TotalPages = Math.Truncate((TotalRecords + MaxRecordsByPage - 1) / MaxRecordsByPage)
                 End If
                 '
             Catch ex As Exception
