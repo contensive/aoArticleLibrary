@@ -1,0 +1,20 @@
+Layouts:Article Library Search Layout
+
+- al-pc-listResultLink
+- al-pc-category
+- al-pc-listPagination
+- al-pc-resultsPerPage
+
+Layouts:Article Library Result Layout
+- al-pc-listResultLink
+- al-pc-keyword
+- al-pc-category
+- al-pc-listPagination
+- al-pc-resultsPerPage
+
+Layouts:Article Library Details Layout
+- al-pc-article-image
+- al-pc-articleTitle
+- al-pc-authorDate
+- al-pc-articleDetails
+- al-pc-detailPageLinks

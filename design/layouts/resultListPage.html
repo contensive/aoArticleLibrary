@@ -12,41 +12,41 @@
   </head>
 
   <body>
-    <div class="articleLibraryWrapper">
+    <div class="articleLibrary">
+      <div class="articleLibraryWrapper">
       <!-- SEARCH AND FILTER TOOLS -->
 
-        <form enctype="MULTIPART/FORM-DATA" method="POST">
-          <div class="searchTools">
-            <div class="fieldData form-group">
-              <input class="keyword form-control" type="Text" name="key" placeholder="Keyword">
+          <div class="al-searchTools">
+            <div class="al-fieldData form-group">
+              <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
             </div>
-            <div class="fieldData form-group">
-              <select size="1" name="cat" class="category form-control">
+            <div class="al-fieldData form-group">
+              <select size="1" name="cat" class="al-pc-category al-category form-control">
                 <option value="">Category</option>
                 <option value="1">ACategory</option>
               </select>
             </div>
-            <div class="buttonContainer">
+            <div class="al-buttonContainer">
               <button type="submit" class="btn btn-default">Search</button>
             </div>
           </div>
-        </form>
 
       <!-- FEATURED ARTICLES / NEWEST ITEMS LIST (Limit 10) / LIST RESULTS -->
-      <div id="listResults" class="listResults">
+      <div class="al-pc-listResults al-listResults">
         <h2>Search Results</h2>
+        <div class="al-displayedResults al-dr-Top">Showing <span class="al-displayedResultStart">1</span> through <span class="al-displayedResultEnd">10</span> of <span class="al-allResults">35</span> <span class="displayedList">results</span> </div>
         <!-- First Item -->
-        <a class="listResultLink" href="#">
-          <div class="listResult well">
-            <div class="listImg"><img src="{{ImgSource}}"></div>
-            <div class="listContent">
-              <div class="itemTitle">{{Title}}</div>
-              <div class="itemDescription">
+        <a class="al-pc-listResultLink al-listResultLink" href="#">
+          <div class="al-listResult well">
+            <div class="al-listImg"><img src="{{ImgSource}}"></div>
+            <div class="al-listContent">
+              <div class="al-itemTitle">{{Title}}</div>
+              <div class="al-itemDescription">
                 {{Description}}
                 <span class="readMore text-primary">Read More</span>
               </div>
-              <div class="itemDate"><strong class="boldedText">Date: </strong><span>{{Date}}</span></div>
-              <div class="itemAuthor"><strong>Author: </strong><span>{{Author}}</span></div>
+              <div class="al-itemDate"><strong class="boldedText">Date: </strong><span>{{Date}}</span></div>
+              <div class="al-itemAuthor"><strong>Author: </strong><span>{{Author}}</span></div>
             </div>
           </div>
         </a>
@@ -55,10 +55,10 @@
         <!-- Third Item -->
         <!-- Fourth Item -->
         <!-- Fifth Item -->
-
-        <div class="paginationULs">
+        <div class="al-displayedResults">Showing <span class="al-displayedResultStart">1</span> through <span class="al-displayedResultEnd">10</span> of <span class="al-allResults">35</span> <span class="displayedList">results</span> </div>
+        <div class="al-paginationULs">
           <!-- Pages -->
-          <ul class="listPagination pagination">
+          <ul class="al-pc-listPagination al-listPagination pagination">
             <li>
               <a href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -77,7 +77,7 @@
           </ul>
 
           <!-- Results Per Page -->
-          <ul class="resultsPerPage pagination">
+          <ul class="al-pc-resultsPerPage al-resultsPerPage pagination">
             <li><a href="#">10</a></li>
             <li class="active"><a href="#">25</a></li>
             <li><a href="#">50</a></li>
@@ -86,6 +86,7 @@
         </div>
 
       </div>
+    </div>
     </div>
   </body>
 </html>
