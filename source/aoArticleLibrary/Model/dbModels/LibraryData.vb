@@ -16,16 +16,33 @@ Namespace Model.dbModels
         Public featuredArticle As Boolean = false
         Public articleAuthor As String = ""
         Public articleDate As String = ""
+        Public articleMonthDate As String = ""
         Public articleImage As String = ""
         '
         '
         '
-        Public Shared Function GetFeaturedArticlesTotalRows(ByVal CP As CPBaseClass) As Integer
+        Public Shared Function GetFeaturedArticlesTotalRows(ByVal CP As CPBaseClass, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As Integer
             Dim totalRecords As Integer = 0
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
                 Dim row As Integer = 0
-                If cs.Open(cnArticleLibraryData, "featuredArticle=1") Then
+                '
+                Dim SqlWhere As String = ""
+                If ArticleLibraryId = 0 Then
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "featuredArticle=1"
+                    Else
+                        SqlWhere = "featuredArticle=1 and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                Else
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "featuredArticle=1 and articleLibraryId=" & ArticleLibraryId
+                    Else
+                        SqlWhere = "featuredArticle=1 and articleLibraryId=" & ArticleLibraryId & " and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                End If
+                '
+                If cs.Open(cnArticleLibraryData, SqlWhere) Then
                     '
                     totalRecords = cs.GetRowCount()
                     '
@@ -37,12 +54,28 @@ Namespace Model.dbModels
             Return totalRecords
         End Function
         '
-        Public Shared Function GetFeaturedArticles(ByVal CP As CPBaseClass, PageNumber As Integer, PageSize As Integer) As List(of LibraryData)
+        Public Shared Function GetFeaturedArticles(ByVal CP As CPBaseClass, PageNumber As Integer, PageSize As Integer, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As List(of LibraryData)
             Dim recordList As New List(Of LibraryData)
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
                 Dim row As Integer = 0
-                If cs.Open(cnArticleLibraryData, "featuredArticle=1",,,, PageSize, PageNumber) Then
+                '
+                Dim SqlWhere As String = ""
+                If ArticleLibraryId = 0 Then
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "featuredArticle=1"
+                    Else
+                        SqlWhere = "featuredArticle=1 and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                Else
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "featuredArticle=1 and articleLibraryId=" & ArticleLibraryId
+                    Else
+                        SqlWhere = "featuredArticle=1 and articleLibraryId=" & ArticleLibraryId & " and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                End If
+                '
+                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
                     '
                     Do
                         '
@@ -66,11 +99,27 @@ Namespace Model.dbModels
         '
         '
         '
-        Public Shared Function GetSearchResultAllCategoriesTotalRows(ByVal CP As CPBaseClass, keyword As String) As Integer
+        Public Shared Function GetSearchResultAllCategoriesTotalRows(ByVal CP As CPBaseClass, keyword As String, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As Integer
             Dim totalRecords As Integer = 0
+            '
+            Dim SqlWhere As String = ""
+            If ArticleLibraryId = 0 Then
+                If InitialArticleLibraryCategoryId = 0 Then
+                    SqlWhere = "(name like '%" & keyword & "%') or (copy like '%" & keyword & "%')"
+                Else
+                    SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                End If
+            Else
+                If InitialArticleLibraryCategoryId = 0 Then
+                    SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryId=" & ArticleLibraryId
+                Else
+                    SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryId=" & ArticleLibraryId & " and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                End If
+            End If
+            '
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
-                If cs.Open(cnArticleLibraryData, "(name like '%" & keyword & "%') or (copy like '%" & keyword & "%')") Then
+                If cs.Open(cnArticleLibraryData, SqlWhere) Then
                     '
                     totalRecords = cs.GetRowCount()
                     '
@@ -82,12 +131,28 @@ Namespace Model.dbModels
             Return totalRecords
         End Function
         '
-        Public Shared Function GetSearchResultAllCategories(ByVal CP As CPBaseClass, keyword As String, PageNumber As Integer, PageSize As Integer) As List(of LibraryData)
+        Public Shared Function GetSearchResultAllCategories(ByVal CP As CPBaseClass, keyword As String, PageNumber As Integer, PageSize As Integer, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As List(of LibraryData)
             Dim recordList As New List(Of LibraryData)
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
                 Dim row As Integer = 0
-                If cs.Open(cnArticleLibraryData, "(name like '%" & keyword & "%') or (copy like '%" & keyword & "%')",,,, PageSize, PageNumber) Then
+                '
+                Dim SqlWhere As String = ""
+                If ArticleLibraryId = 0 Then
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "(name like '%" & keyword & "%') or (copy like '%" & keyword & "%')"
+                    Else
+                        SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                Else
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryId=" & ArticleLibraryId
+                    Else
+                        SqlWhere = "((name like '%" & keyword & "%') or (copy like '%" & keyword & "%')) and articleLibraryId=" & ArticleLibraryId & " and articleLibraryCategoryID=" & InitialArticleLibraryCategoryId
+                    End If
+                End If
+                '
+                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
                     '
                     Do
                         '
@@ -109,11 +174,27 @@ Namespace Model.dbModels
             Return recordList
         End Function
         '
-        Public Shared Function GetSearchResultForCategoriesTotalRows(ByVal CP As CPBaseClass, keyword As String, categoryId As Integer) As Integer
+        Public Shared Function GetSearchResultForCategoriesTotalRows(ByVal CP As CPBaseClass, keyword As String, categoryId As Integer, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As Integer
             Dim totalRecords As Integer = 0
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
-                If cs.Open(cnArticleLibraryData, "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )") Then
+                '
+                Dim SqlWhere As String = ""
+                If ArticleLibraryId = 0 Then
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )"
+                    Else
+                        SqlWhere = "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') ) and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")"
+                    End If
+                Else
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId
+                    Else
+                        SqlWhere = "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")"
+                    End If
+                End If
+                '
+                If cs.Open(cnArticleLibraryData, SqlWhere) Then
                     '
                     totalRecords = cs.GetRowCount()
                     '
@@ -125,12 +206,28 @@ Namespace Model.dbModels
             Return totalRecords
         End Function
         '
-        Public Shared Function GetSearchResultForCategories(ByVal CP As CPBaseClass, keyword As String, categoryId As Integer, PageNumber As Integer, PageSize As Integer) As List(of LibraryData)
+        Public Shared Function GetSearchResultForCategories(ByVal CP As CPBaseClass, keyword As String, categoryId As Integer, PageNumber As Integer, PageSize As Integer, ArticleLibraryId As Integer, InitialArticleLibraryCategoryId As Integer) As List(of LibraryData)
             Dim recordList As New List(Of LibraryData)
             Try
                 Dim cs As CPCSBaseClass = CP.CSNew()
                 Dim row As Integer = 0
-                If cs.Open(cnArticleLibraryData, "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )",,,, PageSize, PageNumber) Then
+                '
+                Dim SqlWhere As String = ""
+                If ArticleLibraryId = 0 Then
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )"
+                    Else
+                        SqlWhere = "(articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') ) and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")"
+                    End If
+                Else
+                    If InitialArticleLibraryCategoryId = 0 Then
+                        SqlWhere = "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId
+                    Else
+                        SqlWhere = "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")"
+                    End If
+                End If
+                '
+                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
                     '
                     Do
                         '
@@ -206,6 +303,7 @@ Namespace Model.dbModels
                 '
                 If Not String.IsNullOrEmpty(cs.GetText("articleDate")) Then
                     recordObject.articleDate = cs.GetDate("articleDate").ToString("MM/dd/yyyy")
+                    recordObject.articleMonthDate = cs.GetDate("articleDate").ToString("MMMM dd, yyyy")
                 End If
                 '
                 If Not String.IsNullOrEmpty(cs.GetText("articleImage")) Then
