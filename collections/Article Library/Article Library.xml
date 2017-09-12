@@ -40,6 +40,7 @@ Initial Articles to Display
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
+
 .libraryContainer{
 	padding:5px;	
 }
@@ -313,6 +314,7 @@ Records to Display]]></ArgumentList>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
+
 .libraryList a{
 	font-weight: bold;
 }
@@ -403,7 +405,8 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 		<ProcessInterval>0</ProcessInterval>
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
-		<Styles><![CDATA[.articleLibrary {}
+		<Styles><![CDATA[
+.articleLibrary {}
 .articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
 .articleLibraryWrapper a {text-decoration: none;}
 .articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
@@ -455,91 +458,91 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 	<data>
 		<record content="Layouts" guid="{8F11E599-EF63-4D9C-BEDE-4973D37A6F73}" name="Article Library Search Layout">
 			<field name="Layout"><![CDATA[    <div class="articleLibrary">
-      <div class="articleLibraryWrapper">
-      <!-- SEARCH AND FILTER TOOLS -->
+    <div class="articleLibraryWrapper">
+    <!-- SEARCH AND FILTER TOOLS -->
 
-        <!-- Search Form -->
-          <div class="al-searchTools">
-            <div class="al-fieldData form-group">
-              <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
-            </div>
-            <div class="al-fieldData form-group">
-              <select size="1" name="cat" class="al-pc-category al-category form-control">
-                <option value="">Category</option>
-                <option value="1">ACategory</option>
-              </select>
-            </div>
-            <div class="al-buttonContainer">
-              <button type="submit" class="btn btn-default">Search</button>
-            </div>
+      <!-- Search Form -->
+        <div class="al-searchTools">
+          <div class="al-fieldData form-group">
+            <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
           </div>
-
-          <!-- Advanced Search Form -->
-
-      <!-- FEATURED ARTICLES / NEWEST ITEMS LIST (Limit 10) / LIST RESULTS -->
-      <div class="al-pc-listResults al-listResults">
-        <h2>Featured Articles</h2>
-        <!-- First Item -->
-        <a class="al-pc-listResultLink al-listResultLink" href="#">
-          <div class="al-listResult well">
-            <div class="al-listImg"><img src="{{ImgSource}}"></div>
-            <div class="al-listContent">
-              <div class="al-itemTitle">{{Title}}</div>
-              <div class="al-itemDescription">
-                {{Description}}
-                <span class="readMore text-primary">Read More</span>
-              </div>
-              <div class="al-itemDate"><strong class="boldedText">Date: </strong><span>{{Date}}</span></div>
-              <div class="al-itemAuthor"><strong>Author: </strong><span>{{Author}}</span></div>
-            </div>
+          <div class="al-pc-categoryDiv al-fieldData form-group">
+            <select size="1" name="cat" class="al-pc-category al-category form-control">
+              <option value="">Category</option>
+              <option value="1">ACategory</option>
+            </select>
           </div>
-        </a>
-
-        <!-- Second Item -->
-        <!-- Third Item -->
-        <!-- Fourth Item -->
-        <!-- Fifth Item -->
-
-        <div class="al-pc-displayedResults al-displayedResults">Showing <span class="al-pc-displayedResultStart al-displayedResultStart">1</span> through <span class="al-pc-displayedResultEnd al-displayedResultEnd">10</span> of <span class="al-pc-allResults al-allResults">35</span> <span class="al-pc-displayedList al-displayedList">results</span> </div>
-        <div class="al-paginationULs">
-
-          <!-- Pages -->
-          <ul class="al-pc-listPagination al-listPagination pagination">
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="active"><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">9</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-
-          <!-- Results Per Page -->
-          <ul class="al-pc-resultsPerPage al-resultsPerPage pagination">
-            <li><a href="#">10</a></li>
-            <li class="active"><a href="#">25</a></li>
-            <li><a href="#">50</a></li>
-            <li><a href="#">100</a></li>
-          </ul>
+          <div class="al-buttonContainer">
+            <button type="submit" class="btn btn-default">Search</button>
+          </div>
         </div>
 
+        <!-- Advanced Search Form -->
+
+    <!-- FEATURED ARTICLES / NEWEST ITEMS LIST (Limit 10) / LIST RESULTS -->
+    <div class="al-pc-listResults al-listResults">
+      <h2>Featured Articles</h2>
+      <!-- First Item -->
+      <a class="al-pc-listResultLink al-listResultLink" href="#">
+        <div class="al-listResult well">
+          <div class="al-listImg"><img src="{{ImgSource}}"></div>
+          <div class="al-listContent">
+            <div class="al-itemTitle">{{Title}}</div>
+            <div class="al-itemDescription">
+              {{Description}}
+              <span class="readMore text-primary">Read More</span>
+            </div>
+            <div class="al-itemDate"><strong class="boldedText">Date: </strong><span>{{Date}}</span></div>
+            <div class="al-itemAuthor"><strong>Author: </strong><span>{{Author}}</span></div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Second Item -->
+      <!-- Third Item -->
+      <!-- Fourth Item -->
+      <!-- Fifth Item -->
+
+      <div class="al-pc-displayedResults al-displayedResults">Showing <span class="al-pc-displayedResultStart al-displayedResultStart">1</span> through <span class="al-pc-displayedResultEnd al-displayedResultEnd">10</span> of <span class="al-pc-allResults al-allResults">35</span> <span class="al-pc-displayedList al-displayedList">results</span> </div>
+      <div class="al-paginationULs">
+
+        <!-- Pages -->
+        <ul class="al-pc-listPagination al-listPagination pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Results Per Page -->
+        <ul class="al-pc-resultsPerPage al-resultsPerPage pagination">
+          <li><a href="#">10</a></li>
+          <li class="active"><a href="#">25</a></li>
+          <li><a href="#">50</a></li>
+          <li><a href="#">100</a></li>
+        </ul>
       </div>
+
     </div>
-    </div>]]></field>
+  </div>
+  </div>]]></field>
 			<field name="StylesFilename"></field>
 			<field name="Active">True</field>
 			<field name="SortOrder"></field>
 		</record>
 		<record content="Layouts" guid="{BD332364-A786-46B1-A0D8-C4B6B55B71A5}" name="Article Library Result Layout">
-			<field name="Layout"><![CDATA[    <div class="articleLibrary">
+			<field name="Layout"><![CDATA[  <div class="articleLibrary">
       <div class="articleLibraryWrapper">
       <!-- SEARCH AND FILTER TOOLS -->
 
@@ -547,7 +550,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
             <div class="al-fieldData form-group">
               <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
             </div>
-            <div class="al-fieldData form-group">
+            <div class="al-pc-categoryDiv al-fieldData form-group">
               <select size="1" name="cat" class="al-pc-category al-category form-control">
                 <option value="">Category</option>
                 <option value="1">ACategory</option>
@@ -627,7 +630,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
               <div class="al-fieldData form-group">
                 <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
               </div>
-              <div class="al-fieldData form-group">
+              <div class="al-pc-categoryDiv al-fieldData form-group">
                 <select size="1" name="cat" class="al-pc-category al-category form-control">
                   <option value="">Category</option>
                   <option value="1">ACategory</option>
@@ -731,10 +734,10 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 		<Field Name="articleLibraryId" active="True" AdminOnly="False" Authorable="True" Caption="Article Library" DeveloperOnly="False" EditSortPriority="150" FieldType="Lookup" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="Article Libraries" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >
 			<HelpDefault><![CDATA[If this article is part of a specific library, select it here. Create Article Libraries by clicking the See all Article Libraries link and adding a record.]]></HelpDefault>
 		</Field>
-		<Field Name="featuredArticle" active="True" AdminOnly="False" Authorable="True" Caption="Featured Article" DeveloperOnly="False" EditSortPriority="1010" FieldType="Boolean" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="0" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
-		<Field Name="articleAuthor" active="True" AdminOnly="False" Authorable="True" Caption="articleAuthor" DeveloperOnly="False" EditSortPriority="1020" FieldType="Text" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
-		<Field Name="articleDate" active="True" AdminOnly="False" Authorable="True" Caption="articleDate" DeveloperOnly="False" EditSortPriority="1030" FieldType="Date" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
-		<Field Name="articleImage" active="True" AdminOnly="False" Authorable="True" Caption="articleImage" DeveloperOnly="False" EditSortPriority="1040" FieldType="Image" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="featuredArticle" active="True" AdminOnly="False" Authorable="True" Caption="Featured Article" DeveloperOnly="False" EditSortPriority="1010" FieldType="Boolean" HTMLContent="False" IndexColumn="" IndexSortDirection="" IndexSortOrder="" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="0" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="True" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="articleAuthor" active="True" AdminOnly="False" Authorable="True" Caption="articleAuthor" DeveloperOnly="False" EditSortPriority="1020" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="articleDate" active="True" AdminOnly="False" Authorable="True" Caption="articleDate" DeveloperOnly="False" EditSortPriority="1030" FieldType="Date" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
+		<Field Name="articleImage" active="True" AdminOnly="False" Authorable="True" Caption="articleImage" DeveloperOnly="False" EditSortPriority="1040" FieldType="Image" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="" RedirectID="" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="Version 2" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 	</CDef>
 	<CDef Name="Article Libraries" Active="1" AdminOnly="0" AllowAdd="1" AllowCalendarEvents="0" AllowContentChildTool="0" AllowContentTracking="0" AllowDelete="1" AllowMetaContent="0" AllowTopicRules="0" AllowWorkflowAuthoring="0" AuthoringDataSourceName="Default" AuthoringTableName="articleLibraries" ContentDataSourceName="Default" ContentTableName="articleLibraries" DefaultSortMethod="By Name" DeveloperOnly="0" DropDownFieldList="Name" EditorGroupName="" Parent="" IconLink="" IconHeight="0" IconWidth="0" IconSprites="0" isbasecontent="0" guid="{B4C375CE-C940-4996-A5B2-71C9413EB54A}" >
 		<Field Name="Name" active="True" AdminOnly="False" Authorable="True" Caption="Name" DeveloperOnly="False" EditSortPriority="110" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" >

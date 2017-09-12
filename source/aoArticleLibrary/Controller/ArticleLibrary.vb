@@ -103,7 +103,7 @@ Namespace Controller
                             layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone, "form-control"))
                         End If
                     Else
-                        layout.SetOuter(".al-pc-category","")
+                        layout.SetOuter(".al-pc-categoryDiv","")
                     End If
 
                     ' **********
@@ -165,7 +165,7 @@ Namespace Controller
                         If InitialArticleLibraryCategoryId=0 Then
                             layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,".al-pc-category form-control"))
                         Else 
-                            layout.SetOuter(".al-pc-category","")
+                            layout.SetOuter(".al-pc-categoryDiv","")
                         End If
 
                         ' **********
@@ -302,7 +302,7 @@ Namespace Controller
                                 layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,"form-control"))
                             End If
                         Else
-                            layout.SetOuter(".al-pc-category","")
+                            layout.SetOuter(".al-pc-categoryDiv","")
                         End If
 
                         ' replace feature node list
