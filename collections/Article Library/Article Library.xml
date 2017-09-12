@@ -41,6 +41,8 @@ Initial Articles to Display
 		<Styles><![CDATA[
 
 
+
+
 .libraryContainer{
 	padding:5px;	
 }
@@ -315,6 +317,8 @@ Records to Display]]></ArgumentList>
 		<Styles><![CDATA[
 
 
+
+
 .libraryList a{
 	font-weight: bold;
 }
@@ -406,6 +410,8 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 		<PageTitle></PageTitle>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
+
+
 .articleLibrary {}
 .articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
 .articleLibraryWrapper a {text-decoration: none;}
@@ -473,7 +479,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
             </select>
           </div>
           <div class="al-buttonContainer">
-            <button type="submit" class="btn btn-default">Search</button>
+            <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
           </div>
         </div>
 
@@ -557,7 +563,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
               </select>
             </div>
             <div class="al-buttonContainer">
-              <button type="submit" class="btn btn-default">Search</button>
+              <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
             </div>
           </div>
 
@@ -637,7 +643,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
                 </select>
               </div>
               <div class="al-buttonContainer">
-                <button type="submit" class="btn btn-default">Search</button>
+                <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
               </div>
             </div>
 

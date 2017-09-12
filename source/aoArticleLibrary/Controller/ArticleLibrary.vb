@@ -78,7 +78,7 @@ Namespace Controller
 
                     Dim returnBtns As String = ""
                     ' Return to Search Results
-                    If Not String.IsNullOrEmpty(CP.Doc.GetText("key")) Then
+                    If Not String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) Then
                         '
                         returnBtns &= "<a class=""al-returnToSearchBtn btn btn-default"" href=""?" & cp.Utils.ModifyQueryString(actualQS,"key",CP.Doc.GetText("key"),true) & """><span class=""glyphicon glyphicon-arrow-left""></span> Return to Search Results</a>" & vbCrLf
                         returnBtns &= "<a class=""al-createSearchBtn btn btn-default"" href=""?" & cp.Utils.ModifyQueryString(actualQS,"key","",false) & """><span class=""glyphicon glyphicon-search""></span> Create another search</a>" & vbCrLf
@@ -111,7 +111,7 @@ Namespace Controller
                     '
                 Else 
                     ' *******************
-                    If String.IsNullOrEmpty(CP.Doc.GetText("key")) Then
+                    If String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) Then
 
                         '
                         ' ******************************
@@ -129,6 +129,7 @@ Namespace Controller
                     
                         ' update the page number
                         actualQS = cp.Utils.ModifyQueryString(actualQS, "page",PageNumber, true)
+                        actualQS = cp.Utils.ModifyQueryString(actualQS, "searchButton",CP.Doc.GetText("searchButton"), true)
 
 
                         Dim HtmlContent As String = ""
@@ -247,6 +248,7 @@ Namespace Controller
                         End If
                         ' update the page number
                         actualQS = cp.Utils.ModifyQueryString(actualQS, "page",PageNumber, true)
+                        actualQS = cp.Utils.ModifyQueryString(actualQS, "searchButton",CP.Doc.GetText("searchButton"), true)
 
 
                         If CP.Doc.GetInteger("cat") = 0 Then
