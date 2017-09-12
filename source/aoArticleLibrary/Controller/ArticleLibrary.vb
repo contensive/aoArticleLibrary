@@ -97,9 +97,9 @@ Namespace Controller
                     If InitialArticleLibraryCategoryId=0 Then
                         If CP.Doc.GetInteger("cat")<>0 Then
                             ' Set the selected category in the drop down
-                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat",CP.Doc.GetInteger("cat"),"Article Library Categories", CategorySqlWhere, CategorySelectNone, "form-control"))
+                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat",CP.Doc.GetInteger("cat"),"Article Library Categories", CategorySqlWhere, CategorySelectNone, "al-pc-category form-control").Replace("size=""1""",""))
                         Else
-                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone, "form-control"))
+                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone, "al-pc-category form-control").Replace("size=""1""",""))
                         End If
                     Else
                         layout.SetOuter(".al-pc-categoryDiv","")
@@ -163,7 +163,7 @@ Namespace Controller
 
                         ' replace category drop down list
                         If InitialArticleLibraryCategoryId=0 Then
-                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,".al-pc-category form-control"))
+                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,"al-pc-category form-control").Replace("size=""1""",""))
                         Else 
                             layout.SetOuter(".al-pc-categoryDiv","")
                         End If
@@ -298,9 +298,9 @@ Namespace Controller
                         If InitialArticleLibraryCategoryId=0 Then
                             If CP.Doc.GetInteger("cat")<>0 Then
                                 ' Set the selected category in the drop down
-                                layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat",CP.Doc.GetInteger("cat"),"Article Library Categories", CategorySqlWhere, CategorySelectNone,"form-control"))
+                                layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat",CP.Doc.GetInteger("cat"),"Article Library Categories", CategorySqlWhere, CategorySelectNone,"al-pc-category form-control").Replace("size=""1""",""))
                             Else
-                                layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,"form-control"))
+                                layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,"al-pc-category form-control").Replace("size=""1""",""))
                             End If
                         Else
                             layout.SetOuter(".al-pc-categoryDiv","")
