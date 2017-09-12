@@ -62,10 +62,10 @@ Namespace Controller
                     authorDate = ArticleData.articleAuthor & " | " & ArticleData.articleMonthDate
 
                     If Not String.IsNullOrEmpty(ArticleData.uploadFileName) Then
-                        detailPageLinks &= "<li class=""><a href=""" & ArticleData.uploadFileName & """><span class=""glyphicon glyphicon-file""></span> Click Here to View the Associated File</a></li>"
+                        detailPageLinks &= "<li><a href=""" & ArticleData.uploadFileName & """><span class=""glyphicon glyphicon-file""></span> Click Here to View the Associated File</a></li>"
                     End If
                     If Not String.IsNullOrEmpty(ArticleData.link) Then
-                        detailPageLinks &= "<li class=""><a href=""" & ArticleData.link & """><span class=""glyphicon glyphicon-globe""></span> Click Here to View the Website</a></li>"
+                        detailPageLinks &= "<li><a href=""" & ArticleData.link & """><span class=""glyphicon glyphicon-globe""></span> Click Here to View the Website</a></li>"
                     End If
 
 
@@ -75,7 +75,6 @@ Namespace Controller
                     Call layout.SetInner(".al-pc-articleDetails", ArticleData.copy)
                     Call layout.SetInner(".al-pc-detailPageLinks", detailPageLinks)
                     '
-
                     Dim returnBtns As String = ""
                     ' Return to Search Results
                     If Not String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) Then

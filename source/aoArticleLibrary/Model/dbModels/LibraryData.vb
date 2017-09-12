@@ -293,7 +293,7 @@ Namespace Model.dbModels
                 recordObject.copy = cs.GetText("copy")
                 '
                 If Not String.IsNullOrEmpty(cs.GetText("uploadFileName")) Then
-                    recordObject.uploadFileName = CP.Site.FilePath & cs.GetText("uploadFileName")
+                    recordObject.uploadFileName = CP.Site.FilePath & cs.GetFilename("uploadFileName")
                 End If
                 '
                 recordObject.link = cs.GetText("link")
