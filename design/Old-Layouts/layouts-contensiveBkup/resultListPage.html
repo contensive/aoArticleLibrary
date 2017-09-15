@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!-- ///////////// CSS /////////////// -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="articleLibrary.css" rel="stylesheet">
+
+    <!-- ///////////// JS /////////////// -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.snippet.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyPaginate.js"></script>
+  </head>
+
+  <body>
+    <div class="articleLibraryWrapper">
+    <!-- SEARCH AND FILTER TOOLS -->
+
+  <div class="searchTools">
+  <div class="fieldData form-group">
+    <input class="keyword form-control" type="Text" name="key" placeholder="Keyword">
+  </div>
+  <div class="fieldData form-group">
+    <select size="1" name="cat" class="category form-control">
+    <option value="">Category</option>
+    <option value="1">ACategory</option>
+    </select>
+  </div>
+  <div class="buttonContainer">
+    <button type="submit" class="btn btn-default">Search</button>
+  </div>
+  </div>
+
+    <!-- FEATURED ARTICLES / NEWEST ITEMS LIST (Limit 10) / LIST RESULTS -->
+    <div class="listResults">
+<h2>Search Results</h2>
+      <div class="displayedResults dr-Top">Showing <span class="displayedResultStart">1</span> through <span class="displayedResultEnd">10</span> of <span class="allResults">35</span> <span class="displayedList">results</span> </div>
+       <a class="listResultLink" href="#">
+        <div class="listResult well">
+          <div class="listImg"><img src="{{ImgSource}}"></div>
+          <div class="listContent">
+            <div class="itemTitle">{{Title}}</div>
+            <div class="itemDescription">
+              {{Description}}
+              <span class="readMore text-primary">Read More</span>
+            </div>
+            <div class="itemDate"><strong class="boldedText">Date: </strong><span>{{Date}}</span></div>
+            <div class="itemAuthor"><strong>Author: </strong><span>{{Author}}</span></div>
+          </div>
+        </div>
+      </a>
+
+  <div class="displayedResults">Showing <span class="displayedResultStart">1</span> through <span class="displayedResultEnd">10</span> of <span class="allResults">35</span> <span class="displayedList">results</span> </div>
+          <div class="paginationULs">
+        <!-- Pages -->
+        <ul class="listPagination pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="active"><a href="#">5</a></li>
+          <li><a href="#">6</a></li>
+          <li><a href="#">7</a></li>
+          <li><a href="#">8</a></li>
+          <li><a href="#">9</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Results Per Page -->
+        <ul class="resultsPerPage pagination">
+          <li><a href="#">10</a></li>
+          <li class="active"><a href="#">25</a></li>
+          <li><a href="#">50</a></li>
+          <li><a href="#">100</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  </body>
+</html>

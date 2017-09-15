@@ -1,0 +1,46 @@
+.articleLibrary {}
+.articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
+.articleLibraryWrapper a {text-decoration: none;}
+.articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
+
+/*********************** LIST RESULTS **********************/
+  .al-searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
+    .al-fieldData {flex-grow: 1; margin-right:15px;}
+    .al-buttonContainer {}
+
+  .al-listResults {}
+    .al-listResult {display: flex; margin-bottom:15px; padding:5px 5px;}
+      .al-listImg {margin-right:20px;}
+        .al-listImg img {width:200px;}
+      .al-listContent {color:initial;}
+        .al-itemTitle {font-size: 18px; font-weight: bold;}
+        .al-itemDescription {padding-bottom:10px;}
+        .al-itemDate {}
+        .al-itemAuthor {}
+      .al-displayedResults {}
+      .al-displayedResults.al-dr-Top {padding-bottom:6px;}
+        .al-displayedResultStart, .al-displayedResultEnd, .al-allResults {font-weight: bold;}
+        .al-displayedResultStart {}
+        .al-displayedResultEnd {}
+        .al-allResults {}
+      .al-paginationULs {display:flex; flex-wrap:nowrap; justify-content: space-between;}
+        .al-pc-listPagination al-listPagination {}
+        .al-resultsPerPage {}
+
+/*********************** DETAILS PAGE **********************/
+/** header **/
+  .al-articleHeading {text-align: center;}
+  .al-articleHeading img {max-width:100%; max-height:500px;}
+  .al-authorDate {font-size:18px;}
+/** article **/
+  .al-article{margin-top:25px;}
+
+/** footer **/
+  .al-returnBtns {text-align: center;}
+  .al-returnBtns a.btn {border-radius:50px;margin-right: 20px;}
+    .al-returnToSearchBtn {}
+    .al-createSearchBtn {}
+  ul.al-detailPageLinks {list-style-type: none; padding:0;}
+  ul.al-detailPageLinks li {padding: 2px 0;}
+/*********************** BOOTSTRAP 4 CLASSES **********************/
+.mx-auto {margin-right: auto !important;margin-left: auto !important;float:none;}

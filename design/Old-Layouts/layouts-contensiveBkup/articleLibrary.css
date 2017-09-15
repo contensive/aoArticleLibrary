@@ -1,0 +1,45 @@
+.articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
+.articleLibraryWrapper a {text-decoration: none;}
+.articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
+/*.articleLibraryWrapper .listResult {color:initial;}*/
+/*********************** LIST RESULTS **********************/
+  .searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
+    .fieldData {flex-grow: 1; margin-right:15px;}
+    .buttonContainer {}
+
+  .listResults {}
+    .listResult {display: flex; margin-bottom:15px; padding:5px 5px;}
+      .listImg {margin-right:20px;}
+        .listImg img {width:200px;}
+      .listContent {color:initial;}
+        .itemTitle {font-size: 18px; font-weight: bold;}
+        .itemDescription {padding-bottom:10px;}
+        /*.readMore {color:blue;}*/
+        .itemDate {}
+        .itemAuthor {}
+      .displayedResults {}
+      .displayedResults.dr-Top {padding-bottom:6px;}
+        .displayedResultStart, .displayedResultEnd, .allResults {font-weight: bold;}
+        .displayedResultStart {}
+        .displayedResultEnd {}
+        .allResults {}
+      .paginationULs {display:flex; flex-wrap:nowrap; justify-content: space-between;}
+        .listPagination {}
+        .resultsPerPage {}
+
+/*********************** DETAILS PAGE **********************/
+header {}
+  .article-heading {text-align: center;}
+  .article-heading img {max-width:100%; max-height:500px;}
+  .authorDate {font-size:18px;}
+article {margin-top:25px;}
+
+footer {}
+  .returnBtns {text-align: center;}
+  .returnBtns a.btn {border-radius:50px;margin-right: 20px;}
+    .returnToSearchBtn {}
+    .createSearchBtn {}
+  ul.detailPageLinks {list-style-type: none; padding:0;}
+  ul.detailPageLinks li {padding: 2px 0;}
+/*********************** BOOTSTRAP 4 CLASSES **********************/
+.mx-auto {margin-right: auto !important;margin-left: auto !important;float:none;}
