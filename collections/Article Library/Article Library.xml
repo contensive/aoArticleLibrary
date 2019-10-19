@@ -123,13 +123,13 @@ Initial Articles to Display
 	else
 		criteria = "(1=1)"
 	end if
-	recordID = cp.utils.encodeInteger(cp.doc.var("rec"))
-	categoryID = cp.utils.encodeInteger(cp.doc.var("cat"))
-	keyWord = cp.doc.var("key")
+	recordID = cp.utils.encodeInteger(cp.doc.getText("rec"))
+	categoryID = cp.utils.encodeInteger(cp.doc.getText("cat"))
+	keyWord = cp.doc.getText("key")
 	pageReference = CP.Request.Page & "?" & CP.Request.QueryString
-	hidePrint = cp.utils.EncodeBoolean(cp.doc.var("hideprint"))
-	initialrecords = cp.utils.encodeInteger(cp.doc.var("Initial Articles to Display"))
-	initialCategory = cp.utils.encodeInteger(cp.doc.var("Initial Article Library Category"))
+	hidePrint = cp.utils.EncodeBoolean(cp.doc.getText("hideprint"))
+	initialrecords = cp.utils.encodeInteger(cp.doc.getText("Initial Articles to Display"))
+	initialCategory = cp.utils.encodeInteger(cp.doc.getText("Initial Article Library Category"))
 
 	if recordID <> 0 then
 
@@ -158,7 +158,7 @@ Initial Articles to Display
 		stream = stream & cp.html.div("<a href=""" & link & """>Return to Search Results</a>",,"returnContainer")
 	end if
 	'
-	if cp.doc.var("button") = "Search" then
+	if cp.doc.getText("button") = "Search" then
 		if keyWord <> "" then
 			criteria = criteria & "and((name like " & cp.db.encodeSQLText("%" & keyword & "%") & ")"
 			criteria = criteria & " OR (copy like " & cp.db.encodeSQLText("%" & keyword & "%") & "))"
@@ -268,7 +268,7 @@ Initial Articles to Display
 		stream = cp.html.form(stream)
 	end if
 
-	if ((recordID <> 0) OR (cp.doc.var("button") = "Search")) and (not hidePrint) then
+	if ((recordID <> 0) OR (cp.doc.getText("button") = "Search")) and (not hidePrint) then
 		link = cp.utils.ModifyLinkQueryString(pageReference, "rec", 0)
 		link = cp.Utils.ModifyLinkQueryString(link, "key", "")
 		link = cp.Utils.ModifyLinkQueryString(link, "cat", 0)
@@ -343,7 +343,7 @@ Records to Display]]></ArgumentList>
 	dim articleLibraryId
 	dim criteria
 
-	recordsToDisplay = cp.utils.encodeInteger(cp.doc.var("Records to Display"))
+	recordsToDisplay = cp.utils.encodeInteger(cp.doc.getText("Records to Display"))
 	articleLibraryId = cp.doc.getInteger( "article Library" )
 	if ( articleLibraryId>0 ) then
 		criteria = "(articleLibraryId=" & articleLibraryId & ")"

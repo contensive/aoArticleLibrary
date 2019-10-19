@@ -75,13 +75,13 @@ Namespace Model.dbModels
                     End If
                 End If
                 '
-                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
+                If cs.Open(cnArticleLibraryData, SqlWhere, "", True, "", PageSize, PageNumber) Then
                     '
                     Do
                         '
-                        row +=1
+                        row += 1
                         If row > PageSize Then
-                            Exit do
+                            Exit Do
                         End If
                         recordList.Add(GetRecordFromId(CP, cs.GetInteger("id")))
                         '
@@ -152,13 +152,13 @@ Namespace Model.dbModels
                     End If
                 End If
                 '
-                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
+                If cs.Open(cnArticleLibraryData, SqlWhere, "", True, "", PageSize, PageNumber) Then
                     '
                     Do
                         '
-                        row +=1
+                        row += 1
                         If row > PageSize Then
-                            Exit do
+                            Exit Do
                         End If
                         recordList.Add(GetRecordFromId(CP, cs.GetInteger("id")))
                         '
@@ -227,13 +227,13 @@ Namespace Model.dbModels
                     End If
                 End If
                 '
-                If cs.Open(cnArticleLibraryData, SqlWhere,,,, PageSize, PageNumber) Then
+                If cs.Open(cnArticleLibraryData, SqlWhere, "", True, "", PageSize, PageNumber) Then
                     '
                     Do
                         '
-                        row +=1
+                        row += 1
                         If row > PageSize Then
-                            Exit do
+                            Exit Do
                         End If
                         recordList.Add(GetRecordFromId(CP, cs.GetInteger("id")))
                         '

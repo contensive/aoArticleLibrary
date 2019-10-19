@@ -9,16 +9,16 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("aoArticleLibrary")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Amazon.com")> 
-<Assembly: AssemblyProduct("aoArticleLibrary")> 
-<Assembly: AssemblyCopyright("Copyright © Amazon.com 2017")> 
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("aoArticleLibrary")>
+<Assembly: AssemblyCopyright("")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("a724c974-bb87-4d29-892c-d02283353eaa")> 
+<Assembly: Guid("a724c974-bb87-4d29-892c-d02283353eaa")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("5.1.*")>
+<Assembly: AssemblyFileVersion("5.1.0.0")>
