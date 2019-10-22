@@ -317,9 +317,12 @@ Records to Display]]></ArgumentList>
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
-
-
-
+ul.al-resultsPerPage li a {
+    padding-right: 5px;
+}
+ul.al-listPagination li a {
+    padding-right: 5px;
+}
 
 .libraryList a{
 	font-weight: bold;
@@ -482,7 +485,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
             </select>
           </div>
           <div class="al-buttonContainer">
-            <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
+            <button name="searchButton" type="submit" class="btn btn-primary" value="processSearch">Search</button>
           </div>
         </div>
 
@@ -566,7 +569,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
               </select>
             </div>
             <div class="al-buttonContainer">
-              <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
+              <button name="searchButton" type="submit" class="btn btn-primary" value="processSearch">Search</button>
             </div>
           </div>
 
@@ -646,7 +649,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
                 </select>
               </div>
               <div class="al-buttonContainer">
-                <button name="searchButton" type="submit" class="btn btn-default" value="processSearch">Search</button>
+                <button name="searchButton" type="submit" class="btn btn-primary" value="processSearch">Search</button>
               </div>
             </div>
 
@@ -698,12 +701,12 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
               <hr>
 
               <!-- Return Buttons -->
-              <footer>
+              <div>
                 <div class="al-returnBtns">
-                  <a class="al-returnToSearchBtn btn btn-default" href="#"><span class="glyphicon glyphicon-arrow-left"></span> Return to Search Results</a>
-                  <a class="al-createSearchBtn btn btn-default" href="#"><span class="glyphicon glyphicon-search"></span> Create another search</a>
+                  <a class="al-returnToSearchBtn btn btn-primary" href="#"><span class="glyphicon glyphicon-arrow-left"></span> Return to Search Results</a>
+                  <a class="al-createSearchBtn btn btn-primary" href="#"><span class="glyphicon glyphicon-search"></span> Create another search</a>
                 </div>
-              </footer>
+              </div>
 
           </div>
 

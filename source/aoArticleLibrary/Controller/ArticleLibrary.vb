@@ -79,12 +79,12 @@ Namespace Controller
                     ' Return to Search Results
                     If Not String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) Then
                         '
-                        returnBtns &= "<a class=""al-returnToSearchBtn btn btn-default"" href=""?" & cp.Utils.ModifyQueryString(actualQS,"key",CP.Doc.GetText("key"),true) & """><span class=""glyphicon glyphicon-arrow-left""></span> Return to Search Results</a>" & vbCrLf
-                        returnBtns &= "<a class=""al-createSearchBtn btn btn-default"" href=""?" & cp.Utils.ModifyQueryString(actualQS,"key","",false) & """><span class=""glyphicon glyphicon-search""></span> Create another search</a>" & vbCrLf
+                        returnBtns &= "<a class=""al-returnToSearchBtn btn btn-primary"" href=""?" & CP.Utils.ModifyQueryString(actualQS, "key", CP.Doc.GetText("key"), True) & """><span class=""glyphicon glyphicon-arrow-left""></span> Return to Search Results</a>" & vbCrLf
+                        returnBtns &= "<a class=""al-createSearchBtn btn btn-primary"" href=""?" & CP.Utils.ModifyQueryString(actualQS, "key", "", False) & """><span class=""glyphicon glyphicon-search""></span> Create another search</a>" & vbCrLf
                         '
-                    Else 
+                    Else
                         '
-                        returnBtns &= "<a class=""al-createSearchBtn btn btn-default"" href=""?" & cp.Utils.ModifyQueryString(actualQS,"key","",false) & """><span class=""glyphicon glyphicon-arrow-left""></span> Return to Featured Articles</a>" & vbCrLf
+                        returnBtns &= "<a class=""al-createSearchBtn btn btn-primary"" href=""?" & CP.Utils.ModifyQueryString(actualQS, "key", "", False) & """><span class=""glyphicon glyphicon-arrow-left""></span> Return to Featured Articles</a>" & vbCrLf
                         '
                     End If
                     ' Create another search
