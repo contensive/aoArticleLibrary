@@ -349,18 +349,21 @@ Namespace Controller
                                                    &  "<li" & IIf(PageSize = 100," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","100",true) & """>100</a></li>" & vbCrLf
 
                         layout.SetInner(".al-pc-resultsPerPage", liResultsPerPageHtml)
+                        If (TotalSearchRows <> 0) Then
+                            layout.SetInner(".al-pc-displayedResultStart", ((PageNumber - 1) * PageSize + 1))
+                        Else
+                            layout.SetInner(".al-pc-displayedResultStart", 0)
+                        End If
+                        layout.SetInner(".al-pc-displayedResultEnd", IIf(PageNumber * PageSize > TotalSearchRows, TotalSearchRows, PageNumber * PageSize).ToString())
+                            layout.SetInner(".al-pc-allResults", TotalSearchRows)
 
-                        layout.SetInner(".al-pc-displayedResultStart", ((PageNumber - 1)* PageSize + 1) )
-                        layout.SetInner(".al-pc-displayedResultEnd", IIf(PageNumber* PageSize> TotalSearchRows, TotalSearchRows,PageNumber* PageSize ).ToString())
-                        layout.SetInner(".al-pc-allResults", TotalSearchRows)
-
-                        ' **********
-                        '
-                        returnHtml = CP.html.Form(layout.GetHtml())
-                        '
+                            ' **********
+                            '
+                            returnHtml = CP.html.Form(layout.GetHtml())
+                            '
+                        End If
+                        ' *******************
                     End If
-                    ' *******************
-                End If
 
 
                 '
