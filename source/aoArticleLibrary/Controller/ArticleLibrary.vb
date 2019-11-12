@@ -108,9 +108,9 @@ Namespace Controller
                     ' **********
                     returnHtml = CP.html.Form(layout.GetHtml())
                     '
-                Else 
+                Else
                     ' *******************
-                    If String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) Then
+                    If (String.IsNullOrEmpty(CP.Doc.GetText("searchButton")) And String.IsNullOrEmpty(CP.Doc.GetText("key"))) Then
 
                         '
                         ' ******************************
@@ -125,10 +125,10 @@ Namespace Controller
                         If PageNumber > TotalPageNumbers Then
                             PageNumber = 1
                         End If
-                    
+
                         ' update the page number
-                        actualQS = cp.Utils.ModifyQueryString(actualQS, "page",PageNumber, true)
-                        actualQS = cp.Utils.ModifyQueryString(actualQS, "searchButton",CP.Doc.GetText("searchButton"), true)
+                        actualQS = CP.Utils.ModifyQueryString(actualQS, "page", PageNumber, True)
+                        actualQS = CP.Utils.ModifyQueryString(actualQS, "searchButton", CP.Doc.GetText("searchButton"), True)
 
 
                         Dim HtmlContent As String = ""
@@ -142,18 +142,18 @@ Namespace Controller
 
                                 HtmlContent = OneLibraryData.copy
                                 If HtmlContent.Length > 300 Then
-                                    HtmlContent = HtmlContent.Substring(0,300) & " ..."
+                                    HtmlContent = HtmlContent.Substring(0, 300) & " ..."
                                 Else
-                                    featuredHtmlTemplate = featuredHtmlTemplate.Replace("<span class=""readMore text-primary"">Read More</span>","")
+                                    featuredHtmlTemplate = featuredHtmlTemplate.Replace("<span class=""readMore text-primary"">Read More</span>", "")
                                 End If
 
                                 oneFeaturedHtml &= featuredHtmlTemplate _
-                                    .Replace("{{ImgSource}}",OneLibraryData.articleImage) _
-                                    .Replace("{{Title}}",OneLibraryData.name) _
+                                    .Replace("{{ImgSource}}", OneLibraryData.articleImage) _
+                                    .Replace("{{Title}}", OneLibraryData.name) _
                                     .Replace("{{Description}}", HtmlContent) _
-                                    .Replace("{{Date}}",OneLibraryData.articleDate) _
-                                    .Replace("{{Author}}",OneLibraryData.articleAuthor) _
-                                    .Replace("href=""#""", "href=""?" & cp.Utils.ModifyQueryString(actualQS,"articleId",OneLibraryData.id,true) & """")
+                                    .Replace("{{Date}}", OneLibraryData.articleDate) _
+                                    .Replace("{{Author}}", OneLibraryData.articleAuthor) _
+                                    .Replace("href=""#""", "href=""?" & CP.Utils.ModifyQueryString(actualQS, "articleId", OneLibraryData.id, True) & """")
                             End If
                             '
                         Next
@@ -162,10 +162,10 @@ Namespace Controller
                         layout.SetOuter(".al-pc-listResultLink", oneFeaturedHtml)
 
                         ' replace category drop down list
-                        If InitialArticleLibraryCategoryId=0 Then
-                            layout.SetOuter(".al-pc-category",CP.Html.SelectContent("cat","","Article Library Categories", CategorySqlWhere, CategorySelectNone,"al-pc-category form-control").Replace("size=""1""",""))
-                        Else 
-                            layout.SetOuter(".al-pc-categoryDiv","")
+                        If InitialArticleLibraryCategoryId = 0 Then
+                            layout.SetOuter(".al-pc-category", CP.Html.SelectContent("cat", "", "Article Library Categories", CategorySqlWhere, CategorySelectNone, "al-pc-category form-control").Replace("size=""1""", ""))
+                        Else
+                            layout.SetOuter(".al-pc-categoryDiv", "")
                         End If
 
                         ' **********
@@ -181,39 +181,39 @@ Namespace Controller
 
                         '
 
-                        If startPage > 1
-                            liListPagination &= "<li><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",PageNumber-1,true) & """ aria-label=""Previous""><span aria-hidden=""true"">&laquo;</span></a></li>"
+                        If startPage > 1 Then
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber - 1, True) & """ aria-label=""Previous""><span aria-hidden=""true"">&laquo;</span></a></li>"
                         End If
 
                         For i = 1 To TotalPageNumbers
-                            If (i>= startPage And i<=endPage) Then
-                                liListPagination &= "<li" & IIf(i = PageNumber," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",i,true) & """>" & i & "</a></li>"
+                            If (i >= startPage And i <= endPage) Then
+                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & "</a></li>"
                             End If
                         Next
 
-                        If PageNumber < TotalPageNumbers
-                            liListPagination &= "<li><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",PageNumber+1,true) & """ aria-label=""Next""><span aria-hidden=""true"">&raquo;</span></a></li>"
+                        If PageNumber < TotalPageNumbers Then
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber + 1, True) & """ aria-label=""Next""><span aria-hidden=""true"">&raquo;</span></a></li>"
                         End If
 
                         layout.SetInner(".al-pc-listPagination", liListPagination)
 
                         ' **********
                         ' Rows by Page
-                        actualQS = cp.Utils.ModifyQueryString(actualQS, "page","1", true)
+                        actualQS = CP.Utils.ModifyQueryString(actualQS, "page", "1", True)
 
-                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","10",true) & """>10</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 25," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","25",true) & """>25</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 50," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","50",true) & """>50</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 100," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","100",true) & """>100</a></li>" & vbCrLf
+                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "10", True) & """>10</a></li>" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 25, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "25", True) & """>25</a></li>" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 50, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "50", True) & """>50</a></li>" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 100, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "100", True) & """>100</a></li>" & vbCrLf
 
                         layout.SetInner(".al-pc-resultsPerPage", liResultsPerPageHtml)
 
-                        layout.SetInner(".al-pc-displayedResultStart", ((PageNumber - 1)* PageSize + 1) )
-                        layout.SetInner(".al-pc-displayedResultEnd", IIf(PageNumber* PageSize> TotalSearchRows, TotalSearchRows,PageNumber* PageSize ).ToString())
+                        layout.SetInner(".al-pc-displayedResultStart", ((PageNumber - 1) * PageSize + 1))
+                        layout.SetInner(".al-pc-displayedResultEnd", IIf(PageNumber * PageSize > TotalSearchRows, TotalSearchRows, PageNumber * PageSize).ToString())
                         layout.SetInner(".al-pc-allResults", TotalSearchRows)
 
                         ' **********
-                        returnHtml = CP.html.Form(layout.GetHtml())
+                        returnHtml = CP.Html.Form(layout.GetHtml())
                         '
                     Else
 
