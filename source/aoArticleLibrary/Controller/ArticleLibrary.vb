@@ -182,17 +182,19 @@ Namespace Controller
                         '
 
                         If startPage > 1 Then
-                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber - 1, True) & """ aria-label=""Previous""><span aria-hidden=""true"">&laquo;</span></a></li>"
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber - 1, True) & """ aria-label=""Previous""><span aria-hidden=""true"">  &laquo; Previous &nbsp;</span></a></li>"
                         End If
 
                         For i = 1 To TotalPageNumbers
                             If (i >= startPage And i <= endPage) Then
-                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & "</a></li>"
+                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & ", </a></li> &nbsp;"
+                            ElseIf (i >= startPage And i <= endPage And i = 1) Then
+                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & "</a></li> &nbsp;"
                             End If
                         Next
 
                         If PageNumber < TotalPageNumbers Then
-                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber + 1, True) & """ aria-label=""Next""><span aria-hidden=""true"">&raquo;</span></a></li>"
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber + 1, True) & """ aria-label=""Next""><span aria-hidden=""true"">Next &raquo;</span></a></li>"
                         End If
 
                         layout.SetInner(".al-pc-listPagination", liListPagination)
@@ -201,10 +203,10 @@ Namespace Controller
                         ' Rows by Page
                         actualQS = CP.Utils.ModifyQueryString(actualQS, "page", "1", True)
 
-                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "10", True) & """>10</a></li>" & vbCrLf _
-                                                   & "<li" & IIf(PageSize = 25, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "25", True) & """>25</a></li>" & vbCrLf _
-                                                   & "<li" & IIf(PageSize = 50, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "50", True) & """>50</a></li>" & vbCrLf _
-                                                   & "<li" & IIf(PageSize = 100, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "100", True) & """>100</a></li>" & vbCrLf
+                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "10", True) & """> 10, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 25, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "25", True) & """> 25, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 50, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "50", True) & """> 50, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 100, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "100", True) & """> 100</a></li> &nbsp;" & vbCrLf
 
                         layout.SetInner(".al-pc-resultsPerPage", liResultsPerPageHtml)
 
@@ -323,18 +325,20 @@ Namespace Controller
 
                         '
 
-                        If startPage > 1
-                            liListPagination &= "<li><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",PageNumber-1,true) & """ aria-label=""Previous""><span aria-hidden=""true"">&laquo;</span></a></li>"
+                        If startPage > 1 Then
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber - 1, True) & """ aria-label=""Previous""><span aria-hidden=""true""> &laquo; Previous &nbsp;</span></a></li>"
                         End If
 
                         For i = 1 To TotalPageNumbers
-                            If (i>= startPage And i<=endPage) Then
-                                liListPagination &= "<li" & IIf(i = PageNumber," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",i,true) & """>" & i & "</a></li>"
+                            If (i >= startPage And i <= endPage And i <> 1) Then
+                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & ", </a></li> &nbsp;"
+                            ElseIf (i >= startPage And i <= endPage And i = 1) Then
+                                liListPagination &= "<li" & IIf(i = PageNumber, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", i, True) & """>" & i & "</a></li> &nbsp;"
                             End If
                         Next
 
-                        If PageNumber < TotalPageNumbers
-                            liListPagination &= "<li><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"page",PageNumber+1,true) & """ aria-label=""Next""><span aria-hidden=""true"">&raquo;</span></a></li>"
+                        If PageNumber < TotalPageNumbers Then
+                            liListPagination &= "<li><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "page", PageNumber + 1, True) & """ aria-label=""Next""><span aria-hidden=""true"">Next &raquo;</span></a></li>"
                         End If
 
                         layout.SetInner(".al-pc-listPagination", liListPagination)
@@ -343,10 +347,10 @@ Namespace Controller
                         ' Rows by Page
                         actualQS = cp.Utils.ModifyQueryString(actualQS, "page","1", true)
 
-                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","10",true) & """>10</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 25," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","25",true) & """>25</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 50," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","50",true) & """>50</a></li>" & vbCrLf _
-                                                   &  "<li" & IIf(PageSize = 100," class=""active"" ","") & "><a href=""?" & cp.Utils.ModifyQueryString(actualQS,"rows","100",true) & """>100</a></li>" & vbCrLf
+                        Dim liResultsPerPageHtml = "<li" & IIf(PageSize = 10, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "10", True) & """> 10, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 25, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "25", True) & """> 25, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 50, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "50", True) & """> 50, </a></li> &nbsp;" & vbCrLf _
+                                                   & "<li" & IIf(PageSize = 100, " class=""active"" ", "") & "><a href=""?" & CP.Utils.ModifyQueryString(actualQS, "rows", "100", True) & """> 100</a></li>" & vbCrLf
 
                         layout.SetInner(".al-pc-resultsPerPage", liResultsPerPageHtml)
                         If (TotalSearchRows <> 0) Then

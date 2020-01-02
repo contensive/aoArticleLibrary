@@ -141,7 +141,7 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 		<Styles><![CDATA[
 
 .articleLibrary {}
-.articleLibraryWrapper {width:800px;margin:auto;padding:20px;}
+.articleLibraryWrapper {margin:auto;padding:20px;}
 .articleLibraryWrapper a {text-decoration: none;}
 .articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
 
