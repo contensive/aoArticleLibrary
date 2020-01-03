@@ -188,9 +188,9 @@ Namespace Model.dbModels
                     End If
                 Else
                     If InitialArticleLibraryCategoryId = 0 Then
-                        SqlWhere = IIf(String.IsNullOrEmpty(keyword),"((articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId, "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId)
+                        SqlWhere = IIf(String.IsNullOrEmpty(keyword), "(articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId, "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId)
                     Else
-                        SqlWhere = IIf(String.IsNullOrEmpty(keyword),"((articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")","((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")")
+                        SqlWhere = IIf(String.IsNullOrEmpty(keyword), "(articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")", "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")")
                     End If
                 End If
                 '
@@ -221,9 +221,9 @@ Namespace Model.dbModels
                     End If
                 Else
                     If InitialArticleLibraryCategoryId = 0 Then
-                        SqlWhere = IIf(String.IsNullOrEmpty(keyword),"((articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId, "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId)
+                        SqlWhere = IIf(String.IsNullOrEmpty(keyword), "(articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId, "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId)
                     Else
-                        SqlWhere = IIf(String.IsNullOrEmpty(keyword),"((articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")","((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")")
+                        SqlWhere = IIf(String.IsNullOrEmpty(keyword), "(articleLibraryCategoryID=" & categoryId & ") and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")", "((articleLibraryCategoryID=" & categoryId & ") and ((name like '%" & keyword & "%') or (copy like '%" & keyword & "%') )) and articleLibraryId=" & ArticleLibraryId & " and (articleLibraryCategoryID=" & InitialArticleLibraryCategoryId & ")")
                     End If
                 End If
                 '
