@@ -8,9 +8,9 @@
 		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass></DotNetClass>
 		<ArgumentList><![CDATA[
-Article Library=[Any:0|listID(Article Libraries)]
-Records to Display
-]]></ArgumentList>
+      Article Library=[Any:0|listID(Article Libraries)]
+      Records to Display
+      ]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
 		<Help></Help>
@@ -40,66 +40,67 @@ Records to Display
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
-ul.al-resultsPerPage li a {
-    padding-right: 5px;
-}
-ul.al-listPagination li a {
-    padding-right: 5px;
-}
+      ul.al-resultsPerPage li a {
+          padding-right: 5px;
+      }
+      ul.al-listPagination li a {
+          padding-right: 5px;
+      }
 
-.libraryList a{
-	font-weight: bold;
-}
+      .libraryList a{
+        font-weight: bold;
+      }
 
-.libraryList a:hover{
-	font-weight: bold;
-}
+      .libraryList a:hover{
+        font-weight: bold;
+      }
 
-.libraryList a:visited{
-	font-weight: bold;
-}]]></Styles>
+      .libraryList a:visited{
+        font-weight: bold;
+      }]]></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000">
 			<Code><![CDATA[function getContent()
 
-	dim stream
-	dim cs
-	dim rowCount
-	Dim pageReference
-	dim recordsToDisplay
-	dim articleLibraryId
-	dim criteria
+        dim stream
+        dim cs
+        dim rowCount
+        Dim pageReference
+        dim recordsToDisplay
+        dim articleLibraryId
+        dim criteria
 
-	recordsToDisplay = cp.utils.encodeInteger(cp.doc.getText("Records to Display"))
-	articleLibraryId = cp.doc.getInteger( "article Library" )
-	if ( articleLibraryId>0 ) then
-		criteria = "(articleLibraryId=" & articleLibraryId & ")"
-	else
-		criteria = "(1=1)"
-	end if
+        recordsToDisplay = cp.utils.encodeInteger(cp.doc.getText("Records to Display"))
+        articleLibraryId = cp.doc.getInteger( "article Library" )
+        if ( articleLibraryId>0 ) then
+          criteria = "(articleLibraryId=" & articleLibraryId & ")"
+        else
+          criteria = "(1=1)"
+        end if
 
-	if recordsToDisplay = 0 then
-		recordsToDisplay = 5
-	end if
+        if recordsToDisplay = 0 then
+          recordsToDisplay = 5
+        end if
 
-	rowCount = 1
-	pageReference = cp.site.getProperty("News Page Location")
+        rowCount = 1
+        pageReference = cp.site.getProperty("News Page Location")
 
-	set cs = cp.csNew
-	call cs.Open("Article Library Data",criteria,"DateAdded desc")
-	do while (cs.OK()) and (rowCount<=recordsToDisplay)
-		link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cstr(cs.GetInteger("ID")), True)
-		link = cp.Utils.ModifyLinkQueryString(link, "key", "", True)
-		link = cp.Utils.ModifyLinkQueryString(link, "cat", "", True)
-		stream = stream & cp.html.li("<a href=""" & link & """>" & cs.GetText("Name") & "</a>")
-		call cs.goNext()
-		rowCount = rowCount + 1
-	loop
-	call cs.Close()
+        set cs = cp.csNew
+        call cs.Open("Article Library Data",criteria,"DateAdded desc")
+        do while (cs.OK()) and (rowCount<=recordsToDisplay)
+          link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cstr(cs.GetInteger("ID")), True)
+          link = cp.Utils.ModifyLinkQueryString(link, "key", "", True)
+          link = cp.Utils.ModifyLinkQueryString(link, "cat", "", True)
+          stream = stream & cp.html.li("<a href=""" & link & """>" & cs.GetText("Name") & "</a>")
+          call cs.goNext()
+          rowCount = rowCount + 1
+        loop
+        call cs.Close()
 
-	getContent = cp.html.ul(stream,"","libraryList")
+        getContent = cp.html.ul(stream,"","libraryList")
 
-end function]]></Code>
+      end function]]></Code>
 		</Scripting>
+    <Category>Applications.Advanced Forms</Category>
 	</Addon>
 	<Addon name="Article Library" guid="{CC8D2284-F308-4DA6-8158-C94931E1E7B0}" type="Add-on">
 		<Copy></Copy>
@@ -107,9 +108,9 @@ end function]]></Code>
 		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.aoArticleLibrary.Interfaces.Addons.ArticleLibrary]]></DotNetClass>
 		<ArgumentList><![CDATA[
-Article Library=[Any:0|listID(Article Libraries)]
-Initial Article Library Category=[None:0|listID(Article Library Categories)]
-]]></ArgumentList>
+      Article Library=[Any:0|listID(Article Libraries)]
+      Initial Article Library Category=[None:0|listID(Article Library Categories)]
+      ]]></ArgumentList>
 		<AsAjax>No</AsAjax>
 		<Filter>No</Filter>
 		<Help></Help>
@@ -140,54 +141,55 @@ Initial Article Library Category=[None:0|listID(Article Library Categories)]
 		<RemoteAssetLink></RemoteAssetLink>
 		<Styles><![CDATA[
 
-.articleLibrary {}
-.articleLibraryWrapper {margin:auto;padding:20px;}
-.articleLibraryWrapper a {text-decoration: none;}
-.articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
+        .articleLibrary {}
+        .articleLibraryWrapper {margin:auto;padding:20px;}
+        .articleLibraryWrapper a {text-decoration: none;}
+        .articleLibraryWrapper a:hover, .articleLibraryWrapper a:active {text-decoration: none;}
 
-/*********************** LIST RESULTS **********************/
-  .al-searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
-    .al-fieldData {flex-grow: 1; margin-right:15px;}
-    .al-buttonContainer {}
+        /*********************** LIST RESULTS **********************/
+          .al-searchTools {display:flex;flex-direction: row;flex-wrap: nowrap;justify-content: space-between;}
+            .al-fieldData {flex-grow: 1; margin-right:15px;}
+            .al-buttonContainer {}
 
-  .al-listResults {}
-    .al-listResult {display: flex; margin-bottom:15px; padding:5px 5px;}
-      .al-listImg {margin-right:20px;}
-        .al-listImg img {width:200px;}
-      .al-listContent {color:initial;}
-        .al-itemTitle {font-size: 18px; font-weight: bold;}
-        .al-itemDescription {padding-bottom:10px;}
-        .al-itemDate {}
-        .al-itemAuthor {}
-      .al-displayedResults {}
-      .al-displayedResults.al-dr-Top {padding-bottom:6px;}
-        .al-displayedResultStart, .al-displayedResultEnd, .al-allResults {font-weight: bold;}
-        .al-displayedResultStart {}
-        .al-displayedResultEnd {}
-        .al-allResults {}
-      .al-paginationULs {display:flex; flex-wrap:nowrap; justify-content: space-between;}
-        .al-listPagination {}
-        .al-resultsPerPage {}
+          .al-listResults {}
+            .al-listResult {display: flex; margin-bottom:15px; padding:5px 5px;}
+              .al-listImg {margin-right:20px;}
+                .al-listImg img {width:200px;}
+              .al-listContent {color:initial;}
+                .al-itemTitle {font-size: 18px; font-weight: bold;}
+                .al-itemDescription {padding-bottom:10px;}
+                .al-itemDate {}
+                .al-itemAuthor {}
+              .al-displayedResults {}
+              .al-displayedResults.al-dr-Top {padding-bottom:6px;}
+                .al-displayedResultStart, .al-displayedResultEnd, .al-allResults {font-weight: bold;}
+                .al-displayedResultStart {}
+                .al-displayedResultEnd {}
+                .al-allResults {}
+              .al-paginationULs {display:flex; flex-wrap:nowrap; justify-content: space-between;}
+                .al-listPagination {}
+                .al-resultsPerPage {}
 
-/*********************** DETAILS PAGE **********************/
-/** header **/
-  .al-articleHeading {text-align: center;}
-  .al-articleHeading img {max-width:100%; max-height:500px;}
-  .al-authorDate {font-size:18px;}
-/** article **/
-  .al-article{margin-top:25px;}
+        /*********************** DETAILS PAGE **********************/
+        /** header **/
+          .al-articleHeading {text-align: center;}
+          .al-articleHeading img {max-width:100%; max-height:500px;}
+          .al-authorDate {font-size:18px;}
+        /** article **/
+          .al-article{margin-top:25px;}
 
-/** footer **/
-  .al-returnBtns {text-align: center;}
-  .al-returnBtns a.btn {border-radius:50px;margin-right: 20px;}
-    .al-returnToSearchBtn {}
-    .al-createSearchBtn {}
-  ul.al-detailPageLinks {list-style-type: none; padding:0;}
-  ul.al-detailPageLinks li {padding: 2px 0;}
-/*********************** BOOTSTRAP 4 CLASSES **********************/
-.mx-auto {margin-right: auto !important;margin-left: auto !important;float:none;}
-]]></Styles>
+        /** footer **/
+          .al-returnBtns {text-align: center;}
+          .al-returnBtns a.btn {border-radius:50px;margin-right: 20px;}
+            .al-returnToSearchBtn {}
+            .al-createSearchBtn {}
+          ul.al-detailPageLinks {list-style-type: none; padding:0;}
+          ul.al-detailPageLinks li {padding: 2px 0;}
+        /*********************** BOOTSTRAP 4 CLASSES **********************/
+        .mx-auto {margin-right: auto !important;margin-left: auto !important;float:none;}
+        ]]></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
+    <Category>Applications.Advanced Forms</Category>
 	</Addon>
 	<Addon name="Article Library V2" guid="{8a2b632c-a86d-4477-bba0-fd22444c9cb2}" type="Add-on">
 		<DotNetClass></DotNetClass>
