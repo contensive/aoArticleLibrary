@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="windows-1252"?>
-<Collection name="Article Library" guid="{FB1FD91D-A393-4D78-AAB4-27382CEC2D12}" system="No" updatable="Yes" blockNavigatorNode="No">
+<Collection name="Article Library" guid="{FB1FD91D-A393-4D78-AAB4-27382CEC2D12}" system="No" updatable="Yes" blockNavigatorNode="No"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://contensive.s3.amazonaws.com/xsd/Collection.xsd"
+>
 	<HelpLink>http://wiki.kmacloud.net/index.php?title=Article_Library</HelpLink>
 	<Help></Help>
 	<Addon name="Article Library List" guid="{BD8F8132-2FF1-4AA4-99D4-8D5F8CD9A3B2}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
-		<DotNetClass></DotNetClass>
+		<DotNetClass><![CDATA[Contensive.aoArticleLibrary.Interfaces.Addons.ArticleLibraryList]]></DotNetClass>
 		<ArgumentList><![CDATA[
       Article Library=[Any:0|listID(Article Libraries)]
       Records to Display
@@ -58,54 +60,12 @@
       .libraryList a:visited{
         font-weight: bold;
       }]]></Styles>
-		<Scripting Language="" EntryPoint="" Timeout="5000">
-			<Code><![CDATA[function getContent()
-
-        dim stream
-        dim cs
-        dim rowCount
-        Dim pageReference
-        dim recordsToDisplay
-        dim articleLibraryId
-        dim criteria
-
-        recordsToDisplay = cp.utils.encodeInteger(cp.doc.getText("Records to Display"))
-        articleLibraryId = cp.doc.getInteger( "article Library" )
-        if ( articleLibraryId>0 ) then
-          criteria = "(articleLibraryId=" & articleLibraryId & ")"
-        else
-          criteria = "(1=1)"
-        end if
-
-        if recordsToDisplay = 0 then
-          recordsToDisplay = 5
-        end if
-
-        rowCount = 1
-        pageReference = cp.site.getProperty("News Page Location")
-
-        set cs = cp.csNew
-        call cs.Open("Article Library Data",criteria,"DateAdded desc")
-        do while (cs.OK()) and (rowCount<=recordsToDisplay)
-          link = cp.Utils.ModifyLinkQueryString(pageReference, "rec", cstr(cs.GetInteger("ID")), True)
-          link = cp.Utils.ModifyLinkQueryString(link, "key", "", True)
-          link = cp.Utils.ModifyLinkQueryString(link, "cat", "", True)
-          stream = stream & cp.html.li("<a href=""" & link & """>" & cs.GetText("Name") & "</a>")
-          call cs.goNext()
-          rowCount = rowCount + 1
-        loop
-        call cs.Close()
-
-        getContent = cp.html.ul(stream,"","libraryList")
-
-      end function]]></Code>
-		</Scripting>
+		<Scripting Language="" EntryPoint="" Timeout="5000"/>
     <Category>Applications.Advanced Forms</Category>
 	</Addon>
 	<Addon name="Article Library" guid="{CC8D2284-F308-4DA6-8158-C94931E1E7B0}" type="Add-on">
 		<Copy></Copy>
 		<CopyText></CopyText>
-		<ActiveXProgramID></ActiveXProgramID>
 		<DotNetClass><![CDATA[Contensive.aoArticleLibrary.Interfaces.Addons.ArticleLibrary]]></DotNetClass>
 		<ArgumentList><![CDATA[
       Article Library=[Any:0|listID(Article Libraries)]
@@ -185,8 +145,6 @@
             .al-createSearchBtn {}
           ul.al-detailPageLinks {list-style-type: none; padding:0;}
           ul.al-detailPageLinks li {padding: 2px 0;}
-        /*********************** BOOTSTRAP 4 CLASSES **********************/
-        .mx-auto {margin-right: auto !important;margin-left: auto !important;float:none;}
         ]]></Styles>
 		<Scripting Language="" EntryPoint="" Timeout="5000"/>
     <Category>Applications.Advanced Forms</Category>
@@ -206,11 +164,11 @@
 
       <!-- Search Form -->
         <div class="al-searchTools">
-          <div class="al-fieldData form-group">
+          <div class="al-fieldData mb-3">
             <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
           </div>
-          <div class="al-pc-categoryDiv al-fieldData form-group">
-            <select size="1" name="cat" class="al-pc-category al-category form-control">
+          <div class="al-pc-categoryDiv al-fieldData mb-3">
+            <select size="1" name="cat" class="al-pc-category al-category form-select">
               <option value="">Category</option>
               <option value="1">ACategory</option>
             </select>
@@ -227,7 +185,7 @@
       <h2>Featured Articles</h2>
       <!-- First Item -->
       <a class="al-pc-listResultLink al-listResultLink" href="#">
-        <div class="al-listResult well">
+        <div class="al-listResult border rounded p-3">
           <div class="al-listImg"><img src="{{ImgSource}}"></div>
           <div class="al-listContent">
             <div class="al-itemTitle">{{Title}}</div>
@@ -290,11 +248,11 @@
       <!-- SEARCH AND FILTER TOOLS -->
 
           <div class="al-searchTools">
-            <div class="al-fieldData form-group">
+            <div class="al-fieldData mb-3">
               <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
             </div>
-            <div class="al-pc-categoryDiv al-fieldData form-group">
-              <select size="1" name="cat" class="al-pc-category al-category form-control">
+            <div class="al-pc-categoryDiv al-fieldData mb-3">
+              <select size="1" name="cat" class="al-pc-category al-category form-select">
                 <option value="">Category</option>
                 <option value="1">ACategory</option>
               </select>
@@ -309,7 +267,7 @@
         <h2>Search Results</h2>
         <!-- First Item -->
         <a class="al-pc-listResultLink al-listResultLink" href="#">
-          <div class="al-listResult well">
+          <div class="al-listResult border rounded p-3">
             <div class="al-listImg"><img src="{{ImgSource}}"></div>
             <div class="al-listContent">
               <div class="al-itemTitle">{{Title}}</div>
@@ -370,11 +328,11 @@
         <!-- SEARCH AND FILTER TOOLS -->
 
             <div class="al-searchTools">
-              <div class="al-fieldData form-group">
+              <div class="al-fieldData mb-3">
                 <input class="al-pc-keyword al-keyword form-control" type="Text" name="key" placeholder="Keyword">
               </div>
-              <div class="al-pc-categoryDiv al-fieldData form-group">
-                <select size="1" name="cat" class="al-pc-category al-category form-control">
+              <div class="al-pc-categoryDiv al-fieldData mb-3">
+                <select size="1" name="cat" class="al-pc-category al-category form-select">
                   <option value="">Category</option>
                   <option value="1">ACategory</option>
                 </select>
@@ -421,10 +379,10 @@
                 <div class="col-lg-8 col-md-10">
                   <ul class="al-pc-detailPageLinks al-detailPageLinks">
                     <li class="">
-                      <a href="#"><span class="glyphicon glyphicon-file"></span> Click Here to View the Associated File</a>
+                      <a href="#"><span class="bi bi-file-earmark"></span> Click Here to View the Associated File</a>
                     </li>
                     <li class="">
-                      <a href="#"><span class="glyphicon glyphicon-globe"></span> Click Here to View the Website</a>
+                      <a href="#"><span class="bi bi-globe"></span> Click Here to View the Website</a>
                     </li>
                   </ul>
                 </div>
@@ -434,8 +392,8 @@
               <!-- Return Buttons -->
               <div>
                 <div class="al-returnBtns">
-                  <a class="al-returnToSearchBtn btn btn-primary" href="#"><span class="glyphicon glyphicon-arrow-left"></span> Return to Search Results</a>
-                  <a class="al-createSearchBtn btn btn-primary" href="#"><span class="glyphicon glyphicon-search"></span> Create another search</a>
+                  <a class="al-returnToSearchBtn btn btn-primary" href="#"><span class="bi bi-arrow-left"></span> Return to Search Results</a>
+                  <a class="al-createSearchBtn btn btn-primary" href="#"><span class="bi bi-search"></span> Create another search</a>
                 </div>
               </div>
 
@@ -490,5 +448,5 @@
 		<Field Name="SortOrder" active="True" AdminOnly="False" Authorable="False" Caption="Alpha Sort Order" DeveloperOnly="False" EditSortPriority="2000" FieldType="Text" HTMLContent="False" IndexColumn="0" IndexSortDirection="" IndexSortOrder="0" IndexWidth="0" RedirectID="0" RedirectPath="" Required="False" TextBuffered="False" UniqueName="False" DefaultValue="" RSSTitle="False" RSSDescription="False" MemberSelectGroupID="0" EditTab="" Scramble="False" LookupList="" NotEditable="False" Password="False" ReadOnly="False" ManyToManyRulePrimaryField="" ManyToManyRuleSecondaryField="" IsModified="False" IsBaseField="False" LookupContent="" RedirectContent="" ManyToManyContent="" ManyToManyRuleContent="" ></Field>
 	</CDef>
 	<ImportCollection name="BootstrapV51">{2d3f9a21-9602-4549-b5df-5e09a9dae57e}</ImportCollection>
-	<Resource name="placeholder.png" type="www" path="img" />
+	<Resource name="wwwFiles.zip" type="wwwFiles" />
 </Collection>
